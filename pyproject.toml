@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling>=1.21.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ecommerce-chat-agent"
+version = "0.1.0"
+description = "Embeddable FastAPI router, WebSocket manager, and tiered AI/human session orchestrator for e-commerce stores."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [
+  { name = "E-Commerce Chat Agent Maintainers" },
+]
+keywords = ["fastapi", "websocket", "ecommerce", "chatbot", "redis", "ai-agent", "multi-tenant"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Framework :: FastAPI",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Communications :: Chat",
+  "Typing :: Typed",
+]
+dependencies = [
+  "fastapi>=0.110.0",
+  "pydantic>=2.6.0",
+  "redis>=5.0.0",
+  "openai>=1.30.0",
+]
+
+[project.optional-dependencies]
+langchain = [
+  "langchain-core>=0.2.0",
+  "langchain-openai>=0.1.0",
+]
+dev = [
+  "pytest>=8.0.0",
+  "pytest-asyncio>=0.23.0",
+  "httpx>=0.27.0",
+  "fakeredis>=2.21.0",
+  "websockets>=12.0",
+  "build>=1.2.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ecommerce_chat"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/tests",
+  "/README.md",
+  "/LICENSE",
+  "/pyproject.toml",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+pythonpath = ["src"]
